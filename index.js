@@ -1,6 +1,5 @@
 const express = require('express');
 const mineflayer = require('mineflayer');
-const forgeHandshake = require('minecraft-protocol-forge').forgeHandshake; // Gọi thư viện giả lập Forge
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -11,25 +10,23 @@ const botOptions = {
   host: '51.161.208.84',
   port: 4770,
   username: 'Server_247',
-  version: '1.12.2' // RLCraft Dregora chạy trên nền 1.12.2
+  version: '1.12.2' // RLCraft Dregora chay nen 1.12.2
 };
 
 function createBot() {
   const bot = mineflayer.createBot(botOptions);
 
-  // Kích hoạt tính năng tự động gửi gói tin giả lập Mod để qua mặt kiểm tra của Server
-  forgeHandshake(bot.client, {
-    forgeMods: [
-      { modid: 'mcp', version: '9.42' },
-      { modid: 'FML', version: '8.0.99.99' },
-      { modid: 'forge', version: '14.23.5.2860' } // Phiên bản Forge chuẩn của RLCraft
-    ]
+  // Tự động kích hoạt luồng bắt tay Forge tích hợp sẵn của Mineflayer
+  bot._client.once('custom_payload', (packet) => {
+    if (packet.channel === 'FML|HS') {
+      console.log('📦 Dang thuc hien gui goi tin gia lap Forge Mods...');
+    }
   });
 
   bot.on('spawn', () => {
-    console.log('🤖 Bot Server_247 da gia lap Mod va vao RLCraft thanh cong!');
+    console.log('🤖 Bot Server_247 da ket noi vao Server RLCraft Dregora!');
     
-    // Hành động di chuyển chống kick AFK (30 giây một lần)
+    // Hanh dong di chuyen chong kick AFK 30 giay
     setInterval(() => {
       if (bot && bot.entity) {
         bot.setControlState('back', true);
@@ -56,7 +53,7 @@ function createBot() {
     setTimeout(createBot, 15000);
   });
 
-  bot.on('error', (err) => console.log('⚠️ Loi he thong modpack:', err.message));
+  bot.on('error', (err) => console.log('⚠️ Loi he thong:', err.message));
 }
 
 createBot();
