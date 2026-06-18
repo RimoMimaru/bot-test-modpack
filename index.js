@@ -10,7 +10,7 @@ const botOptions = {
   host: '51.161.208.84',
   port: 4770,
   username: 'Server_247',
-  version: '1.12.2' // RLCraft Dregora chay nen 1.12.2
+  version: '1.12.2' // RLCraft Dregora chay tren nen 1.12.2
 };
 
 function createBot() {
