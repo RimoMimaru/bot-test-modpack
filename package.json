@@ -1,0 +1,10 @@
+{
+  "name": "bot-test-render",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mineflayer": "^4.21.0",
+    "minecraft-protocol-forge": "^1.0.1"
+  }
+}
