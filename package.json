@@ -1,9 +1,9 @@
 {
-  "name": "bot-test-modpack",
+  "name": "bot-test-vanilla",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
     "express": "^4.19.2",
-    "mineflayer": "3.11.2"
+    "mineflayer": "^4.21.0"
   }
 }
