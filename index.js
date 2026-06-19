@@ -9,8 +9,8 @@ app.listen(PORT, () => console.log(`Web server dang chay tren cong ${PORT}`));
 
 // ================= CẤU HÌNH BOT MINECRAFT MỚI CỦA BẠN =================
 const botOptions = {
-  host: '51.161.208.84',           // 🌟 ĐÃ ĐỔI: IP server mới
-  port: 4770,                      // 🌟 ĐÃ ĐỔI: Port server mới
+  host: 'NH1_MCSocial.aternos.me',           // 🌟 ĐÃ ĐỔI: IP server mới
+  port: 52367,                      // 🌟 ĐÃ ĐỔI: Port server mới
   username: 'Server_247_2',          // Tên nhân vật của Bot
   version: '1.21.11',               // Phiên bản Minecraft
   viewDistance: 'tiny'             // Giảm tầm nhìn để tiết kiệm RAM
