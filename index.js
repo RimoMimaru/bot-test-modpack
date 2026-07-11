@@ -9,11 +9,11 @@ app.listen(PORT, () => console.log(`Web server dang chay tren cong ${PORT}`));
 
 // ================= CẤU HÌNH BOT MINECRAFT MỚI CỦA BẠN =================
 const botOptions = {
-  host: 'NH1_MCSocial.aternos.me',           // 🌟 ĐÃ ĐỔI: IP server mới
-  port: 52367,                      // 🌟 ĐÃ ĐỔI: Port server mới
-  username: 'Server_247_2',          // Tên nhân vật của Bot
-  version: '1.21.11',               // Phiên bản Minecraft
-  viewDistance: 'tiny'             // Giảm tầm nhìn để tiết kiệm RAM
+  host: 'kingmc.vn',                  // IP server KingMC
+  port: 25565,                        // Cổng mặc định
+  username: 'Noshava',                // Tên nhân vật của Bot
+  version: '1.21.11',                  // Phiên bản tối ưu cho KingMC
+  viewDistance: 'tiny'                // Giảm tầm nhìn để tiết kiệm RAM
 };
 // =====================================================================
 
@@ -21,44 +21,26 @@ function createBot() {
   const bot = mineflayer.createBot(botOptions);
 
   bot.on('spawn', () => {
-    console.log('🤖 Bot Server_247 da vao server Minecraft moi thanh cong!');
+    console.log('🤖 Bot Noshava da vao server kingmc.vn thanh cong!');
     
-    // 🔥 CẬP NHẬT: Cứ mỗi 30 giây (30000ms), bot tự LÙI -> NHẢY -> TIẾN
-    setInterval(() => {
-      if (bot && bot.entity) {
-        console.log('🚶 Bot dang thuc hien hanh dong anti-afk...');
-        
-        // 1. Lùi lại
-        bot.setControlState('back', true);
-        
-        setTimeout(() => {
-          bot.setControlState('back', false);
-          
-          // 2. Nhảy lên
-          bot.setControlState('jump', true);
-          
-          setTimeout(() => {
-            bot.setControlState('jump', false);
-            
-            // 3. Tiến lên lại vị trí cũ
-            bot.setControlState('forward', true);
-            
-            setTimeout(() => {
-              bot.setControlState('forward', false);
-              console.log('✅ Bot da ve lai vi tri cu.');
-            }, 300);
-            
-          }, 200);
-          
-        }, 300);
-      }
-    }, 30000); // 🌟 ĐÃ ĐỔI: 30000ms = 30 giây
+    // 🛠️ ĐÃ SỬA: Thay đổi từ lệnh /register và /login thành lệnh viết tắt /dk và /dn
+    setTimeout(() => {
+       bot.chat('/dk Thuan123@ Thuan123@');
+       console.log('📝 Đã gửi lệnh đăng ký viết tắt (/dk).');
+
+       // Chờ thêm 1.5 giây sau khi đăng ký rồi thực hiện đăng nhập để chắc chắn thành công
+       setTimeout(() => {
+          bot.chat('/dn Thuan123@');
+          console.log('🔑 Đã gửi lệnh đăng nhập viết tắt (/dn).');
+       }, 1500);
+
+    }, 2000); // Gửi lệnh sau khi vào server 2 giây
   });
 
   // Tự động hồi sinh khi chết
   bot.on('death', () => {
     console.log('💀 Bot da bi chet! Dang tu dong hoi sinh...');
-    bot.createBot(); 
+    bot.respawn(); 
   });
 
   // Tự động kết nối lại nếu server bị restart hoặc bot bị đá
